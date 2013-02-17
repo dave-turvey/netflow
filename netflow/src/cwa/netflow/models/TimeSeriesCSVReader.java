@@ -14,7 +14,7 @@
 *  THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-package cwa.netflow.charting;
+package cwa.netflow.models;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;

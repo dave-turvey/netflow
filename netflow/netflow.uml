@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_Ib-OQUlBEeKqbusg4AZmVQ" name="model">
+  <packagedElement xmi:type="uml:Class" xmi:id="_VJUDkElBEeKqbusg4AZmVQ" name="ChartApplication">
+    <ownedAttribute xmi:id="_nRraUElFEeKqbusg4AZmVQ" name="netflowTotals" type="_pX0u0ElCEeKqbusg4AZmVQ" association="_nRraU0lFEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nRraUUlFEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nRraUklFEeKqbusg4AZmVQ" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_pXbl4ElFEeKqbusg4AZmVQ" name="netflowTimeSeries" type="_mdaMIElCEeKqbusg4AZmVQ" association="_pXkv0ElFEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pXbl4UlFEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pXbl4klFEeKqbusg4AZmVQ" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_pXMSIElBEeKqbusg4AZmVQ" name="Interaction0">
+    <lifeline xmi:id="_rKfbwElBEeKqbusg4AZmVQ" name="ChartApplication" represents="_nRraUElFEeKqbusg4AZmVQ" coveredBy="_5lALQUlGEeKqbusg4AZmVQ"/>
+    <lifeline xmi:id="_Pz2TYElEEeKqbusg4AZmVQ" name="Lifeline" represents="_pXbl4ElFEeKqbusg4AZmVQ"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_5lALQUlGEeKqbusg4AZmVQ" name="Application_MessageRecv" covered="_rKfbwElBEeKqbusg4AZmVQ" event="_5lALQElGEeKqbusg4AZmVQ" message="_5V-30ElGEeKqbusg4AZmVQ"/>
+    <fragment xmi:type="uml:InteractionUse" xmi:id="_vgEioElGEeKqbusg4AZmVQ" name="InteractionUse" refersTo="_pXMSIElBEeKqbusg4AZmVQ"/>
+    <message xmi:id="_y0hV8ElGEeKqbusg4AZmVQ" name="Message"/>
+    <message xmi:id="_5V-30ElGEeKqbusg4AZmVQ" name="Application_Message" messageSort="createMessage" receiveEvent="_5lALQUlGEeKqbusg4AZmVQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_4GRVsElBEeKqbusg4AZmVQ" name="NetflowModel">
+    <ownedAttribute xmi:id="_-KWtIElDEeKqbusg4AZmVQ" name="netflowChart" type="_oMvmUElDEeKqbusg4AZmVQ" association="_-KgeIElDEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-KWtIUlDEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-KWtIklDEeKqbusg4AZmVQ" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_PDjw0ElCEeKqbusg4AZmVQ" name="ViewFilter">
+    <ownedAttribute xmi:id="_AijTkElEEeKqbusg4AZmVQ" name="netflowChart" type="_oMvmUElDEeKqbusg4AZmVQ" association="_AijTk0lEEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_AijTkUlEEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_AijTkklEEeKqbusg4AZmVQ" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_mdaMIElCEeKqbusg4AZmVQ" name="NetflowTimeSeries">
+    <generalization xmi:id="_7koBAElDEeKqbusg4AZmVQ" general="_oMvmUElDEeKqbusg4AZmVQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_pX0u0ElCEeKqbusg4AZmVQ" name="NetflowTotals">
+    <generalization xmi:id="_69V-kElDEeKqbusg4AZmVQ" general="_oMvmUElDEeKqbusg4AZmVQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_YLizkElDEeKqbusg4AZmVQ" name="ChartPanel"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_oMvmUElDEeKqbusg4AZmVQ" name="NetflowChart">
+    <generalization xmi:id="_GsNZcElEEeKqbusg4AZmVQ" general="_YLizkElDEeKqbusg4AZmVQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_1FQJ0ElDEeKqbusg4AZmVQ" name="Component0"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_-KgeIElDEeKqbusg4AZmVQ" name="netflowModel_netflowChart_0" memberEnd="_-KgeIUlDEeKqbusg4AZmVQ _-KWtIElDEeKqbusg4AZmVQ">
+    <ownedEnd xmi:id="_-KgeIUlDEeKqbusg4AZmVQ" name="netflowModel" type="_4GRVsElBEeKqbusg4AZmVQ" association="_-KgeIElDEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-KgeIklDEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-KgeI0lDEeKqbusg4AZmVQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_AijTk0lEEeKqbusg4AZmVQ" name="viewFilter_netflowChart_0" memberEnd="_AijTlElEEeKqbusg4AZmVQ _AijTkElEEeKqbusg4AZmVQ">
+    <ownedEnd xmi:id="_AijTlElEEeKqbusg4AZmVQ" name="viewFilter" type="_PDjw0ElCEeKqbusg4AZmVQ" association="_AijTk0lEEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_AitEkElEEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_AitEkUlEEeKqbusg4AZmVQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_nRraU0lFEeKqbusg4AZmVQ" name="chartApplication_netflowTotals_0" memberEnd="_nRraVElFEeKqbusg4AZmVQ _nRraUElFEeKqbusg4AZmVQ">
+    <ownedEnd xmi:id="_nRraVElFEeKqbusg4AZmVQ" name="chartApplication" type="_VJUDkElBEeKqbusg4AZmVQ" association="_nRraU0lFEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nRraVUlFEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nRraVklFEeKqbusg4AZmVQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_pXkv0ElFEeKqbusg4AZmVQ" name="chartApplication_netflowTimeSeries_0" memberEnd="_pXkv0UlFEeKqbusg4AZmVQ _pXbl4ElFEeKqbusg4AZmVQ">
+    <ownedEnd xmi:id="_pXkv0UlFEeKqbusg4AZmVQ" name="chartApplication" type="_VJUDkElBEeKqbusg4AZmVQ" association="_pXkv0ElFEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pXkv0klFEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pXkv00lFEeKqbusg4AZmVQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_BLUR0ElGEeKqbusg4AZmVQ" name="SystemAdmin"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_EDMd4ElGEeKqbusg4AZmVQ" name="Manage Netflow Server"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_UczJkElGEeKqbusg4AZmVQ" name="" memberEnd="_UczJkUlGEeKqbusg4AZmVQ _UczJlElGEeKqbusg4AZmVQ">
+    <ownedEnd xmi:id="_UczJkUlGEeKqbusg4AZmVQ" name="systemadmin" type="_BLUR0ElGEeKqbusg4AZmVQ" association="_UczJkElGEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UczJkklGEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UczJk0lGEeKqbusg4AZmVQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_UczJlElGEeKqbusg4AZmVQ" name="manage netflow server" type="_EDMd4ElGEeKqbusg4AZmVQ" association="_UczJkElGEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UczJlUlGEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UczJlklGEeKqbusg4AZmVQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_WOwPYElGEeKqbusg4AZmVQ" name="ViewNetflowModel"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_YfEFIElGEeKqbusg4AZmVQ" name="Network Analyst"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_cOSv8ElGEeKqbusg4AZmVQ" name="A_network analyst_viewnetflowmodel" memberEnd="_cOSv8UlGEeKqbusg4AZmVQ _cOSv9ElGEeKqbusg4AZmVQ">
+    <ownedEnd xmi:id="_cOSv8UlGEeKqbusg4AZmVQ" name="network analyst" type="_YfEFIElGEeKqbusg4AZmVQ" association="_cOSv8ElGEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cOSv8klGEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_cOSv80lGEeKqbusg4AZmVQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_cOSv9ElGEeKqbusg4AZmVQ" name="viewnetflowmodel" type="_WOwPYElGEeKqbusg4AZmVQ" association="_cOSv8ElGEeKqbusg4AZmVQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cOSv9UlGEeKqbusg4AZmVQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_cOSv9klGEeKqbusg4AZmVQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_y1HL0ElGEeKqbusg4AZmVQ" name="SendOperationEvent"/>
+  <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_zpyKAElGEeKqbusg4AZmVQ" name="ReceiveOperationEvent"/>
+  <packagedElement xmi:type="uml:Signal" xmi:id="_5ViL4ElGEeKqbusg4AZmVQ" name="Application"/>
+  <packagedElement xmi:type="uml:SendSignalEvent" xmi:id="_5WIBwElGEeKqbusg4AZmVQ" name="SendSignalEvent" signal="_5ViL4ElGEeKqbusg4AZmVQ"/>
+  <packagedElement xmi:type="uml:CreationEvent" xmi:id="_5lALQElGEeKqbusg4AZmVQ" name="CreationEvent"/>
+</uml:Model>

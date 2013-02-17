@@ -14,71 +14,122 @@
 *  THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-package cwa;
+package cwa.netflow.services;
+import java.io.IOException;
 import java.net.*;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import cwa.netflow.*;
 import cwa.netflow.protocol.Datagram;
 
-/** NetflowServer - Captures netflow v5 data from devices on UDP port 9876  
+/** NetflowServer - Captures netflow v5 data from devices. Implements observable interface
+* to allow controllers and interfaces to register for changes  
 *
 * @author David Turvey
+* @version 1.1 10-12-12
 * @version 1.0 6-10-12
 */
 
-public class NetflowServer {
-   public static void main(String args[]) throws Exception
-   {
-	   // Parse the arguments for the filename and socket number
-	   String fname="";
-	   Integer port = null;
-	   
-	   for (int i = 0; i < args.length; i++) {
-		   switch (args[i].charAt(0)) {
-		   case '-':
-			   if(args[i].compareToIgnoreCase("-f")==0)
-			   {
-				   fname=args[i+1];
-				   i++;
-			   }
-			   if(args[i].compareToIgnoreCase("-p")==0)
-			   {
-				   port=Integer.parseInt(args[i+1]);
-				   i++;
-			   }
-			   break;
-		   default:
-			   fname = args[i];
-			   break;
-		   }
-	   }
-	   
-	   // Ensure that we have been passed the required parameters
-	   if(port==null || fname=="")
-	   {
-		   LogManager lm = LogManager.getLogManager();
-		   Logger l = lm.getLogger(lm.getLoggerNames().nextElement());
-		   l.log(Level.ALL, "Usage -f [ouput filename] -p [port number]");
-		   System.out.println("Usage -f [ouput filename] -p [port number]");
-		   System.exit(-1);
-	   }
-	   
-	   // Open the socket and write each datagram received to the CSV file
-	   DatagramSocket serverSocket = new DatagramSocket(port.intValue());
-	   System.out.println("Listening on UDP port "+port.intValue());
-	   
-	   // The packet has a maximum of 16 byte header and 24 records of 48 bytes per record (v5)
-	   byte[] receiveData = new byte[2048];
+public class NetflowServer extends Observable{
+	private String fname;
+	private int port;
+	private boolean stopping;
+	private boolean stopped;
+	
+	
+	public NetflowServer(String args[]) throws Exception
+	{
+		// Initialise this as observable
+		super();
+		// Set the default values
+		port = -1;
+		fname = "";
+		// Parse the arguments for the filename and socket number
 
-	   while(true)
-	   {
-		   DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-		   serverSocket.receive(receivePacket);
-		   Datagram d = new Datagram(receiveData);
-		   d.writeCSV(fname);
-	   }
-   }
+		for (int i = 0; i < args.length; i++) {
+			switch (args[i].charAt(0)) {
+			case '-':
+				if(args[i].compareToIgnoreCase("-f")==0)
+				{
+					fname=args[i+1];
+					i++;
+				}
+				if(args[i].compareToIgnoreCase("-p")==0)
+				{
+					port=Integer.parseInt(args[i+1]);
+					i++;
+				}
+				break;
+			default:
+				fname = args[i];
+				break;
+			}
+		}
+		// Ensure that we have been passed the required parameters
+		if(port == -1 || fname == "")
+		{
+			LogManager lm = LogManager.getLogManager();
+			Logger l = lm.getLogger(lm.getLoggerNames().nextElement());
+			l.log(Level.ALL, "Usage -f [ouput filename] -p [port number]");
+			System.out.println("Usage -f [ouput filename] -p [port number]");
+			throw new Exception("Invalid server input parameters");
+		}
+		stopping = false;
+		return;
+	}
+	
+	/** Description of startServer()
+	 *  
+	 *  Starts the server listening on the pot and outputting to the given CSV file
+	 *
+	 */
+	public void startServer() throws IOException
+	{
+		LogManager lm = LogManager.getLogManager();
+		Logger l = lm.getLogger(lm.getLoggerNames().nextElement());
+
+		// Open the socket and write each datagram received to the CSV file
+		DatagramSocket serverSocket=null;
+		try {
+			serverSocket = new DatagramSocket(port);
+		} catch (SocketException e) {
+			l.log(Level.SEVERE,"Unable to start server on port number"+port);
+		}
+
+		l.log(Level.INFO, "Listening on port"+port);
+		// The packet has a maximum of 16 byte header and 24 records of 48 bytes per record (v5)
+		byte[] receiveData = new byte[2048];
+		stopped = false;
+		while(!stopping)
+		{
+			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+			serverSocket.receive(receivePacket);
+			Datagram d = new Datagram(receiveData);
+			d.writeCSV(fname);
+		}
+		stopped = true;
+	}
+	
+	/** Description of stopServer()
+	 *  
+	 *  Flags (but does not guarantee) the server to stop
+	 *
+	 */
+	public void stopServer()
+	{
+		stopping = true;
+	}
+	
+	/** Description of isRunning()
+	 *  
+	 *  @return True if the server is running, false otherwise
+	 *
+	 */
+	public boolean isRunning()
+	{
+		return stopped;
+	}
+
 } 

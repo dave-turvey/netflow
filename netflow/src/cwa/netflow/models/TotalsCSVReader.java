@@ -23,7 +23,7 @@
 * @version 1.0 6-10-12
 */
 
-package cwa.netflow.charting;
+package cwa.netflow.models;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;

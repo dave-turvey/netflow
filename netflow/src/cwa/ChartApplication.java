@@ -46,7 +46,9 @@ import cwa.netflow.charting.NetflowTimeSeriesChart;
 import cwa.netflow.charting.NetflowTotalByIPChart;
 import cwa.netflow.charting.NetflowTotalByProtocol;
 //import cwa.netflow.charting.NetflowTotalByProtocol;
-import cwa.netflow.charting.TimeSeriesCSVReader;
+import cwa.netflow.gui.ApplicationController;
+import cwa.netflow.models.IPRangeFilter;
+import cwa.netflow.models.TimeSeriesCSVReader;
 import cwa.netflow.protocol.ConvertByte;
 
 /** ChartApplication - Displays data captured by flow servers using the JFreechart tools 
@@ -82,12 +84,18 @@ public class ChartApplication {
 			System.out.println("Usage -f [filename]");
 			System.exit(-1);
 		}
-		NetflowTimeSeriesChart tsc=new NetflowTimeSeriesChart("Time Series data by IP",fname);
+
+	
+		/*NetflowTimeSeriesChart tsc=new NetflowTimeSeriesChart("Time Series data by IP",fname);
 		tsc.setVisible(true);
 		NetflowTotalByIPChart tbipc=new NetflowTotalByIPChart("Total by IP",fname);
 		tbipc.setVisible(true);
 		NetflowTotalByProtocol tipc=new NetflowTotalByProtocol("Total by protocol",fname);
-		tipc.setVisible(true);
+		tipc.setVisible(true);*/
+
+		// Create a controller to launch the application
+		ApplicationController mc = new ApplicationController(args);
+
 	}	
 
 }

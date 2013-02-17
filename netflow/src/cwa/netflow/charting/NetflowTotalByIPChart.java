@@ -26,6 +26,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesDataItem;
+
+import cwa.netflow.models.TotalsCSVReader;
 /** NetflowTotalByIPChartChart
  * 
  * Creates and displays netflow octets by IP address using the JFreechart tools 
