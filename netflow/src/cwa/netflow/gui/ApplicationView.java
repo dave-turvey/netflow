@@ -1,11 +1,14 @@
 package cwa.netflow.gui;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -100,7 +103,11 @@ public class ApplicationView implements Runnable, ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// Add the main chart to the application window
-		frame.add(chartPanel);
+		frame.getContentPane().add(chartPanel,BorderLayout.CENTER);
+		//frame.getContentPane().add(new JButton("Hello"),BorderLayout.CENTER);
+		frame.pack();
+		
+		//frame.add(chartPanel);
 		
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);

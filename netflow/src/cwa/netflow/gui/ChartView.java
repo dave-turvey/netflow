@@ -21,11 +21,8 @@ public class ChartView extends JPanel{
 	 */
 	private static final long serialVersionUID = 8844638974670826173L;
 	private JFreeChart chart;
-	JPanel m_panel;
 	
 	public ChartView(ChartModel m_chart_model) {
-		JPanel m_panel = new JPanel();
-		m_panel.setLayout(new java.awt.BorderLayout());
 		
 		TimeSeriesCollection flowdata = new TimeSeriesCollection();
 		HashMap<String,TimeSeries> mappeddata = m_chart_model.getTimeSeriesDataItems();
@@ -37,25 +34,12 @@ public class ChartView extends JPanel{
 		// Create the chart
 		chart = ChartFactory.createTimeSeriesChart("Netflow data", "Time", "Octets", flowdata,  true, true, false);
 
-		// Test the chart in its own window
-		// create the frame to hold the chart
-		
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//TODO: Work out why this dosn't show in the main window!!
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		
-		ChartFrame frame = new ChartFrame("Test chart", chart);
-		frame.pack();
-		frame.setVisible(true);
-		// Add it to this panel for display
+		chart.setTitle("Netflow chart");
+		chart.fireChartChanged();
+		setSize(300, 300);
+		setLayout(new java.awt.BorderLayout());
 		ChartPanel CP = new ChartPanel(chart);
-		m_panel.add(CP,BorderLayout.CENTER);        
-		m_panel.validate();
-		
-	}
-	
-	public JPanel getPanel()
-	{
-		return m_panel;
+		add(CP,BorderLayout.CENTER);        
+		validate();
 	}
 }
