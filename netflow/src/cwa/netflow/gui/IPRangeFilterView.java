@@ -28,20 +28,25 @@ import javax.swing.table.TableModel;
 import javax.swing.UIManager;
 
 public class IPRangeFilterView  extends JDialog {
-	private PropertiesController m_properties_controller;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3724705632364076274L;
+
+	private RangeFilterController m_properties_controller;
 	
 	private JTable table;	
 	private JTextField txtStartIp;
 	private JTextField txtEndIp;
 	
-	public IPRangeFilterView(PropertiesController PC, IPRangeFilter IPFilter) {
+	public IPRangeFilterView(RangeFilterController PC, IPRangeFilter IPFilter) {
 		// Register the Controller so that call backs can be added by the buttons 
 		m_properties_controller = PC;
 		// setup the jtable based on the set of values in the filter
 		IPTableFilterModel table_filter_model = new IPTableFilterModel(IPFilter);
 		table = new JTable(table_filter_model);
 		table_filter_model.addTableModelListener(table);
-		// No add the tbale model as the observer so the table view can be updated when something
+		// No add the table model as the observer so the table view can be updated when something
 		// is added or removed
 		IPFilter.addObserver(table_filter_model);
 		// Kept this as the design view fails on initialisation of the FilterModel

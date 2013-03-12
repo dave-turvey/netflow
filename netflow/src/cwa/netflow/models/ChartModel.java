@@ -10,43 +10,93 @@ import org.jfree.data.time.TimeSeriesCollection;
 
 
 public class ChartModel {
-	TimeSeriesProperties m_time_series_properties;
-	// TotalsProperties m_totals_properties; TODO:Implement totals
+	private ViewType m_current_type;
+	private ChartProperties m_chart_properties;
+	private Calendar m_today;
+	private Calendar m_tomorrow;
+	private static String FNAME = "C:\\Users\\Dave\\Documents\\java\\workspace\\flowdata.csv";
 	
 	public ChartModel()
 	{
-		// TODO: Load the file info from the application properties singleton
-		// today    
-		Calendar today = new GregorianCalendar();	// Midnight today
+		m_today = new GregorianCalendar();	// Midnight today
 		// reset hour, minutes, seconds and millis
-		today.set(Calendar.YEAR, 2012);
-		today.set(Calendar.MONTH, 0);
-		today.set(Calendar.DAY_OF_MONTH, 1);
-		today.set(Calendar.HOUR_OF_DAY, 0);
-		today.set(Calendar.MINUTE, 0);
-		today.set(Calendar.SECOND, 0);
-		today.set(Calendar.MILLISECOND, 0);
+		m_today.set(Calendar.YEAR, 2012);
+		m_today.set(Calendar.MONTH, 0);
+		m_today.set(Calendar.DAY_OF_MONTH, 1);
+		m_today.set(Calendar.HOUR_OF_DAY, 0);
+		m_today.set(Calendar.MINUTE, 0);
+		m_today.set(Calendar.SECOND, 0);
+		m_today.set(Calendar.MILLISECOND, 0);
 
 		// Midnight tomorrow
-		Calendar tomorrow = (Calendar) today.clone();
-		tomorrow.add(Calendar.DAY_OF_MONTH, 1);
-		m_time_series_properties = new TimeSeriesProperties("C:\\Users\\Dave\\Documents\\java\\workspace\\flowdata.csv", today.getTime(), tomorrow.getTime());
-		
+		m_tomorrow = (Calendar) m_today.clone();
+		m_tomorrow.add(Calendar.DAY_OF_MONTH, 1);
+		buildTimeSeriesModel();
 	}
+	
+	private void buildTimeSeriesModel()
+	{
+		// TODO: Load the file info from the application properties singleton    
+		
+		m_chart_properties = new TimeSeriesProperties(FNAME, m_today.getTime(), m_tomorrow.getTime());
+		m_current_type = ViewType.TIMESERIES;
+	}
+	
+	/*
+	 * @return - The time series data items if this is the current model, otherwise null
+	 */
 	
 	public HashMap<String,TimeSeries> getTimeSeriesDataItems()
 	{
-		return m_time_series_properties.getTimeSeriesData();
+		if(m_current_type == ViewType.TIMESERIES)
+		{
+			TimeSeriesProperties tsp = (TimeSeriesProperties) m_chart_properties;
+			return tsp.getTimeSeriesData();
+		}else{
+			return null;
+		}
 	}
 	
-	public TimeSeriesProperties getTimSeriesProperties() {
-		return m_time_series_properties;
+	public HashMap<String, Integer> getIPSeriesDataItems()
+	{
+		if(m_current_type == ViewType.IPADDRESS)
+		{
+			IPRangeProperties iprp = (IPRangeProperties) m_chart_properties;
+			return iprp.getTotalsData();
+		}else{
+			return null;
+		}
 	}
 
-	public void setTimeSeriesProperties(
-			TimeSeriesProperties m_time_series_properties) {
-		this.m_time_series_properties = m_time_series_properties;
+	public HashMap<String, Integer> getProtocolSeriesDataItems() {
+		if(m_current_type == ViewType.PROTOCOL)
+		{
+			ProtocolRangeProperties iprp = (ProtocolRangeProperties) m_chart_properties;
+			return iprp.getTotalsData();
+		}else{
+			return null;
+		}
 	}
 
+	public void setType(ViewType type) {
+		if(type == ViewType.TIMESERIES){
+			buildTimeSeriesModel();
+			m_current_type = type;
+		}
+		if(type == ViewType.IPADDRESS){
+			m_chart_properties = new IPRangeProperties(FNAME);
+			m_current_type = type;
+		}
+		if(type == ViewType.PROTOCOL){
+			m_chart_properties = new ProtocolRangeProperties(FNAME);
+			m_current_type = type;
+		}
+	}
+	
+	public ViewType getType()
+	{
+		return m_current_type;
+	}
 
+	
 }

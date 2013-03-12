@@ -7,6 +7,8 @@ import java.util.Observable;
 import java.util.Scanner;
 import java.util.Vector;
 
+import org.jfree.data.time.TimeSeries;
+
 public class IPRangeFilter extends ChartProperties{
 	Vector<String> m_start_ip;
 	Vector<String> m_end_ip;
@@ -44,9 +46,9 @@ public class IPRangeFilter extends ChartProperties{
 	 * @param endIP		end ip of the address range
 	 *
 	 */
-	public void applyFilter(HashMap<String,String> map)
+	public void applyFilter(HashMap<String, TimeSeries> mappeddata)
 	{
-		Iterator<Entry<String, String>> iter = map.entrySet().iterator();
+		Iterator<Entry<String, TimeSeries>> iter = mappeddata.entrySet().iterator();
 		while (iter.hasNext()) {
 			if(keyInFilter(iter.next().getKey()))
 		    {

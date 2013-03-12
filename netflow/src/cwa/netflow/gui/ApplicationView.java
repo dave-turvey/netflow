@@ -20,12 +20,22 @@ public class ApplicationView implements Runnable, ActionListener{
 	private JMenuBar menuBar;
 	private ArrayList<ActionListener> listeners;
 	private JPanel chartPanel;
+	private ChartController m_chart_controller;
 	
-	public ApplicationView(ChartController m_chart_controller) {
+	public ApplicationView(ChartController chart_controller) {
+		m_chart_controller = chart_controller;
 		listeners = new ArrayList<ActionListener>();
 		chartPanel = m_chart_controller.getChartView();
 	}
 
+	public void fireChartViewChange()
+	{
+		
+		frame.getContentPane().remove(chartPanel);
+		chartPanel = m_chart_controller.getChartView();
+		frame.getContentPane().add(chartPanel,BorderLayout.CENTER);
+		frame.pack();
+	}
 	@Override
 	public void run() {
 		// Initialise the interface in the event dispatch thread see article:
@@ -104,10 +114,7 @@ public class ApplicationView implements Runnable, ActionListener{
 		
 		// Add the main chart to the application window
 		frame.getContentPane().add(chartPanel,BorderLayout.CENTER);
-		//frame.getContentPane().add(new JButton("Hello"),BorderLayout.CENTER);
 		frame.pack();
-		
-		//frame.add(chartPanel);
 		
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -127,11 +134,14 @@ public class ApplicationView implements Runnable, ActionListener{
 		JMenuItem mntmStop = new JMenuItem("Stop");
 		mnListener.add(mntmStop);
 		
-		JMenu mnCharts = new JMenu("Charts");
+		JMenu mnCharts = new JMenu("Chart");
 		menuBar.add(mnCharts);
 		
-		JMenuItem mntmTimeSeries = new JMenuItem("IP Address");
+		JMenuItem mntmTimeSeries = new JMenuItem("Time Series");
 		mnCharts.add(mntmTimeSeries);
+		
+		JMenuItem mntmIPSeries = new JMenuItem("IP Address");
+		mnCharts.add(mntmIPSeries);
 		
 		JMenuItem mntmProtocol = new JMenuItem("Protocol");
 		mnCharts.add(mntmProtocol);

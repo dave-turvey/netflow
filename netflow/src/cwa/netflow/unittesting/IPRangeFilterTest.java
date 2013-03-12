@@ -33,8 +33,8 @@ public class IPRangeFilterTest {
 		map.put("10.10.10.125", "Test 2");
 		map.put("10.10.10.255", "Test 3");
 		map.put("192.168.200.1", "Test 4");
-		
-		iprf.applyFilter(map);
+		//TODO: Modify to test with <string,timeseries>
+		// iprf.applyFilter(map);
 		
 		if(map.size() != 1)
 			fail("Apply filter: returned "+map.size()+ " rather than 1 element after filtering");

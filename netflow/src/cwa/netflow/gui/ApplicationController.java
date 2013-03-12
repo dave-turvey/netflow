@@ -6,7 +6,10 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.SwingWorker;
+
 import cwa.netflow.models.ChartModel;
+import cwa.netflow.models.ViewType;
 
 // Also need a method of registering the model and the view with this controller
 // http://www.irit.fr/~Remi.Bastide/Teaching/Java/MVC/
@@ -15,7 +18,7 @@ import cwa.netflow.models.ChartModel;
 public class ApplicationController implements ActionListener {
 
 	private ApplicationView m_main_window; // Application view object in the MVC
-	private PropertiesController m_properties_controller;
+	private RangeFilterController m_range_filter_controller;
 	private ChartController m_chart_controller;
 	
 	public ApplicationController(final String[] args) {
@@ -41,7 +44,7 @@ public class ApplicationController implements ActionListener {
 			
 			// Create the other controllers on the fly to reduce startup time
 			
-			m_properties_controller = null;
+			m_range_filter_controller = null;
 			
 			//Run the Application Window swing interface in its own thread
 			EventQueue.invokeLater(m_main_window);
@@ -54,15 +57,35 @@ public class ApplicationController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("Action controller action perfomed:"+arg0.getActionCommand());
 		if(arg0.getActionCommand().matches("Properties"))
 		{
-			if(m_properties_controller==null)
+			if(m_range_filter_controller==null)
 			{
-				m_properties_controller = new PropertiesController();
-				// Run this as a swing worker thread
-				m_properties_controller.execute();
+				m_range_filter_controller = new RangeFilterController(m_chart_controller);
 			}
+			m_range_filter_controller.execute();
+			m_range_filter_controller.showView(true);
+		}
+		
+		if(arg0.getActionCommand().matches("Time Series"))
+		{
+			System.out.println("IP address");
+			m_chart_controller.setType(ViewType.TIMESERIES);
+			m_main_window.fireChartViewChange();
+		}
+		
+		if(arg0.getActionCommand().matches("IP Address"))
+		{
+			System.out.println("IP address");
+			m_chart_controller.setType(ViewType.IPADDRESS);
+			m_main_window.fireChartViewChange();
+		}
+		
+		if(arg0.getActionCommand().matches("Protocol"))
+		{
+			System.out.println("Protocol");
+			m_chart_controller.setType(ViewType.PROTOCOL);
+			m_main_window.fireChartViewChange();
 		}
 	}
 }
