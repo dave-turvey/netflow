@@ -26,6 +26,8 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.TimeSeriesDataItem;
 
+import cwa.netflow.models.TimeSeriesCSVReader;
+
 /** NetflowTimeSeriesChart - Creates and displays netflow octets by time using the JFreechart tools 
 *
 * @author David Turvey
@@ -60,7 +62,7 @@ public class NetflowTimeSeriesChart {
 		}
 		
 		chart = ChartFactory.createTimeSeriesChart("Netflow data", "Time", "Octets", flowdata,  true, true, false);
-		
+	
 		// create the frame to hold the chart
 		frame = new ChartFrame(title, chart);
 		frame.pack();

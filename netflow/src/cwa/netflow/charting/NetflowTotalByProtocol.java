@@ -19,6 +19,8 @@ package cwa.netflow.charting;
 import java.util.HashMap;
 import java.util.Vector;
 
+import javax.swing.JPanel;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
@@ -26,6 +28,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesDataItem;
+
+import cwa.netflow.models.TotalsCSVReader;
 /** NetflowTotalByProtocl
  * 
  * Creates and displays netflow octets by Protocol using the JFreechart tools 
@@ -74,4 +78,8 @@ public class NetflowTotalByProtocol {
 		frame.setVisible(visible);
 	}
 	
+	public JPanel getChartPanel()
+	{
+		return frame.getChartPanel();
+	}
 }
