@@ -11,7 +11,7 @@ help an support would always be appreciated!!
 2.  LATEST VERSION
 -------------------
 
-V0.1 available at https://github.com/dave-turvey/netflow.git
+V0.2 available at https://github.com/dave-turvey/netflow.git
 
 -----------------
 3.  DOCUMENTATION
