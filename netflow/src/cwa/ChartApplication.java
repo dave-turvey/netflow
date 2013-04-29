@@ -16,40 +16,12 @@
 
 package cwa;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.TimeZone;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.LegendItemSource;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.title.LegendTitle;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.SeriesException;
-import org.jfree.data.time.Millisecond;
-import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.TimeSeriesCollection;
-import org.jfree.data.time.TimeSeriesDataItem;
-import org.jfree.data.xy.XYDataset;
-
-import cwa.netflow.charting.NetflowTimeSeriesChart;
-import cwa.netflow.charting.NetflowTotalByIPChart;
-import cwa.netflow.charting.NetflowTotalByProtocol;
 //import cwa.netflow.charting.NetflowTotalByProtocol;
 import cwa.netflow.gui.ApplicationController;
-import cwa.netflow.models.IPRangeFilter;
-import cwa.netflow.models.TimeSeriesCSVReader;
-import cwa.netflow.protocol.ConvertByte;
 
 /** ChartApplication - Displays data captured by flow servers using the JFreechart tools 
 *
@@ -82,7 +54,7 @@ public class ChartApplication {
 			Logger l = lm.getLogger(lm.getLoggerNames().nextElement());
 			l.log(Level.ALL, "Usage -f [filename]");
 			System.out.println("Usage -f [filename]");
-			System.exit(-1);
+			//System.exit(-1);
 		}
 
 	
