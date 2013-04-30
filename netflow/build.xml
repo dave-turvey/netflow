@@ -1,0 +1,59 @@
+<project name="Netflow" default="dist" basedir=".">
+    <description>
+        Ant build for Netflow application
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="dist"/>
+  <property name="docs"  location="docs"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+	<mkdir dir="${docs}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}/lib"/>
+
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/lib/netflow-${DSTAMP}.jar" basedir="${build}"/>
+  </target>
+
+  <javadoc
+           destdir="${docs}"
+           author="true"
+           version="true"
+           use="true"
+           windowtitle="Netflow API">
+
+    <packageset dir="src" defaultexcludes="yes">
+      <include name="cwa/**"/>
+    </packageset>
+
+    <doctitle><![CDATA[<h1>Netflow documentation</h1>]]></doctitle>
+    <bottom><![CDATA[<i>Copyright &#169; 2012 David Turvey. All Rights Reserved.</i>]]></bottom>
+    <group title="Group 1 Packages" packages="cwa.*"/>
+    <link offline="true" href="http://download.oracle.com/javase/6/docs/api/" packagelistLoc="C:\tmp"/>
+    <link href="http://developer.java.sun.com/developer/products/xml/docs/api/"/>
+  </javadoc>
+  
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
+
