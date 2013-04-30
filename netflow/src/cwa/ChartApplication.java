@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import cwa.data.DataSource;
 //import cwa.netflow.charting.NetflowTotalByProtocol;
 import cwa.netflow.gui.ApplicationController;
 
@@ -55,6 +56,9 @@ public class ChartApplication {
 			l.log(Level.ALL, "Usage -f [filename]");
 			System.out.println("Usage -f [filename]");
 			//System.exit(-1);
+		}else{
+			DataSource ds = DataSource.getDataSource();
+			ds.setSourceName(fname);
 		}
 
 	

@@ -32,7 +32,7 @@ import cwa.netflow.protocol.Datagram;
 * @version 1.0 6-10-12
 */
 
-public class NetflowServer extends Observable{
+public class NetflowServer extends Observable implements Runnable{
 	private String fname;
 	private int port;
 	private boolean stopping;
@@ -80,16 +80,38 @@ public class NetflowServer extends Observable{
 		return;
 	}
 	
-	/** Description of startServer()
+	
+	/** Description of stopServer()
+	 *  
+	 *  Flags (but does not guarantee) the server to stop
+	 *
+	 */
+	public void stopServer()
+	{
+		stopping = true;
+		System.out.println("Server stopping");
+	}
+	
+	/** Description of isRunning()
+	 *  
+	 *  @return True if the server is running, false otherwise
+	 *
+	 */
+	public boolean isRunning()
+	{
+		return stopped;
+	}
+
+	@Override
+	/** Description of run()
 	 *  
 	 *  Starts the server listening on the pot and outputting to the given CSV file
 	 *
 	 */
-	public void startServer() throws IOException
-	{
+	public void run() {
 		LogManager lm = LogManager.getLogManager();
 		Logger l = lm.getLogger(lm.getLoggerNames().nextElement());
-
+		System.out.println("Server listening on port"+port);
 		// Open the socket and write each datagram received to the CSV file
 		DatagramSocket serverSocket=null;
 		try {
@@ -105,31 +127,17 @@ public class NetflowServer extends Observable{
 		while(!stopping)
 		{
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-			serverSocket.receive(receivePacket);
+			try {
+				serverSocket.receive(receivePacket);
+			} catch (IOException e) {
+				// TODO: Handle exception
+				e.printStackTrace();
+			}
 			Datagram d = new Datagram(receiveData);
 			d.writeCSV(fname);
 		}
 		stopped = true;
-	}
-	
-	/** Description of stopServer()
-	 *  
-	 *  Flags (but does not guarantee) the server to stop
-	 *
-	 */
-	public void stopServer()
-	{
-		stopping = true;
-	}
-	
-	/** Description of isRunning()
-	 *  
-	 *  @return True if the server is running, false otherwise
-	 *
-	 */
-	public boolean isRunning()
-	{
-		return stopped;
+		
 	}
 
 } 

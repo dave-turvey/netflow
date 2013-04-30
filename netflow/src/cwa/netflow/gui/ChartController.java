@@ -9,7 +9,7 @@ public class ChartController {
 	private ChartModel m_chart_model;
 	private ChartView m_chart_view;
 	
-	public ChartController()
+	public ChartController(String[] args)
 	{
 		m_chart_model = new ChartModel();
 		m_chart_view=new TimeChartView(m_chart_model);

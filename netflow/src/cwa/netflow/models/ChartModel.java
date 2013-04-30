@@ -8,13 +8,14 @@ import java.util.HashMap;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 
+import cwa.data.DataSource;
+
 
 public class ChartModel {
 	private ViewType m_current_type;
 	private ChartProperties m_chart_properties;
 	private Calendar m_today;
 	private Calendar m_tomorrow;
-	private static String FNAME = "C:\\Users\\Dave\\Documents\\java\\workspace\\flowdata.csv";
 	
 	public ChartModel()
 	{
@@ -32,13 +33,14 @@ public class ChartModel {
 		m_tomorrow = (Calendar) m_today.clone();
 		m_tomorrow.add(Calendar.DAY_OF_MONTH, 1);
 		buildTimeSeriesModel();
+		
 	}
 	
 	private void buildTimeSeriesModel()
 	{
-		// TODO: Load the file info from the application properties singleton    
-		
-		m_chart_properties = new TimeSeriesProperties(FNAME, m_today.getTime(), m_tomorrow.getTime());
+    
+		DataSource ds = DataSource.getDataSource();		
+		m_chart_properties = new TimeSeriesProperties(ds.getSourceName(), m_today.getTime(), m_tomorrow.getTime());
 		m_current_type = ViewType.TIMESERIES;
 	}
 	
@@ -79,16 +81,18 @@ public class ChartModel {
 	}
 
 	public void setType(ViewType type) {
+		DataSource ds = DataSource.getDataSource();		
+		
 		if(type == ViewType.TIMESERIES){
 			buildTimeSeriesModel();
 			m_current_type = type;
 		}
 		if(type == ViewType.IPADDRESS){
-			m_chart_properties = new IPRangeProperties(FNAME);
+			m_chart_properties = new IPRangeProperties(ds.getSourceName());
 			m_current_type = type;
 		}
 		if(type == ViewType.PROTOCOL){
-			m_chart_properties = new ProtocolRangeProperties(FNAME);
+			m_chart_properties = new ProtocolRangeProperties(ds.getSourceName());
 			m_current_type = type;
 		}
 	}
